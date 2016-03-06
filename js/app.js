@@ -1,7 +1,6 @@
-var ViewModel = function () {
+var Cat = function () {
 	this.clickCount = ko.observable(0);
 	this.name = ko.observable("Juice");
-	this.level = ko.observable("Newborn");
 	this.imgSrc = ko.observable("img/22252709_010df3379e_z.jpg");
 	this.imgAttribution = ko.observable("http://www.google.com");
 	this.nicknames = ko.observableArray([
@@ -10,21 +9,24 @@ var ViewModel = function () {
 		{name: "Rambo"}
 	]);
 
-	this.levelUp = function () {
+	this.levelUp = ko.computed(function () {
 		if (this.clickCount() < 10) {
-			this.level("Newborn");
+			return "Newborn";
 		}else if (this.clickCount() < 50) {
-			this.level("Kitten");
+			return "Kitten";
 		}else if (this.clickCount() < 100) {
-			this.level("Teen");
+			return "Teen";
 		}else{
-			this.level("Oldy");
+			return "Oldy";
 		}
-	};
+	}, this);
+}
+
+var ViewModel = function () {
+	this.currentCat = ko.observable(new Cat());
 
 	this.incrementCounter = function () {
-		this.clickCount(this.clickCount() + 1);
-		this.levelUp();
+		this.currentCat().clickCount(this.currentCat().clickCount() + 1);
 	};
 
 }
