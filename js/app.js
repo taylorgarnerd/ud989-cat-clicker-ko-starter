@@ -4,6 +4,11 @@ var ViewModel = function () {
 	this.level = ko.observable("Newborn");
 	this.imgSrc = ko.observable("img/22252709_010df3379e_z.jpg");
 	this.imgAttribution = ko.observable("http://www.google.com");
+	this.nicknames = ko.observableArray([
+		{name: "Cuddles"},
+		{name: "Jimbo"},
+		{name: "Rambo"}
+	]);
 
 	this.levelUp = function () {
 		if (this.clickCount() < 10) {
